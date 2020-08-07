@@ -1,8 +1,17 @@
 <?php
 	include 'statistics.php';
+
 	$conn = new mysqli("localhost", "root", "", "placement");
 	$tpo_connect = $conn->query("SELECT * from tpo_connect");
  	$tpo_connect = $tpo_connect->fetch_array(MYSQLI_ASSOC);
+	
+	$output = $conn->query("SELECT * from image");
+ 	$output = $output->fetch_array(MYSQLI_ASSOC);
+
+	$testimonial = $conn->query("SELECT * from testimonials");
+ 	$testimonial = $testimonial->fetch_all(MYSQLI_ASSOC);
+ 
+
 ?>
 
 <!DOCTYPE HTML>
@@ -155,7 +164,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="index.html">DMCE</a>
+				<a class="logo" href="./">IT</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -165,7 +174,7 @@
 			<nav id="menu">
 				<ul class="links">
 					<li><a href="./">Home</a></li>
-					<li><a href="#">Elements</a></li>
+					<li><a href="ui_update_form.php">Form</a></li>
 					<li><a href="#">Generic</a></li>
 				</ul>
 			</nav>
@@ -173,8 +182,8 @@
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
-					<h1>IT Department</h1>
-					<p>Placement .</p>
+					<h1><?php echo $output['banner_header'];?></h1>
+					<p><?php echo $output['banner_text'];?></p>
 				</div>
 				<!-- <video autoplay loop muted playsinline src="images/pic03.jpg"></video> -->
 			</section>
@@ -217,7 +226,7 @@
 							</div>
 						</section>
 
-						<section>
+<!-- 						<section>
 							<div class="content">
 								<header>
 									<a href="#" class="icon fa-money "><span class="label">Icon</span></a>
@@ -245,7 +254,7 @@
 								</header>
 								<p>89%.</p>
 							</div>
-						</section>
+						</section> -->
 					</div>
 				</div>
 			</section>
@@ -284,20 +293,16 @@
 			<!-- </div> -->
 			</section>
 
-<!-- 		<section class="wrapper">
-			<div class="content"> <header><h3>Year Vs Package</h3></header> <div id="chart_div1"></div></duv>
-			<div id="chart_div2"></div>
-			<div id="chart_div3"></div>
-
-		</section> -->
-
 
 
 		<!-- CTA -->
 			<section id="cta" class="wrapper">
 				<div class="inner">
-					<h2>About Placement Section</h2>
-					<p>You can decide what you want to do in life, but I suggest doing something that creates. Something that leaves a tangible thing once you're done. That way even after you're gone, you will still live on in the things you created.</p>
+<!-- 					<h2>About Placement Section</h2>
+					<p>You can decide what you want to do in life, but I suggest doing something that creates. Something that leaves a tangible thing once you're done. That way even after you're gone, you will still live on in the things you created.</p> -->
+
+					<h2><?php echo $output['about_header'];?></h2>
+					<p><?php echo $output['about_text'];?></p>
 				</div>
 			</section>
 
@@ -309,10 +314,24 @@
 					<p>You can decide what you want to do in life, but I suggest doing something that creates. Something that leaves a tangible thing once you're done. That way even after you're gone, you will still live on in the things you created.</p>
 					</header>
 					<div class="testimonials">
-						<section>
+						<?php 
+							foreach ($testimonial as $row) {
+								echo "<section>";
+									echo "<div class='content'>";
+										echo "<blockquote><p>".$row['testimonial']."</p></blockquote>";
+										echo "<div class='author'>";
+											// echo "<div class='image'> <img src='images/pic03.jpg' alt='' /> </div>";
+											echo "<p class='credit'>- <strong>".$row['attestant']."</strong> <span>".$row['designation']." - ".$row['organization'].".</span></p>";
+										echo "</div>";
+									echo "</div>";
+								echo "</section>";
+
+						}
+						?>
+<!-- 						<section>
 							<div class="content">
 								<blockquote>
-									<p>The goal of education is the advancement of knowledge and the dissemination of truth.</p>
+									<p><?php echo $testimonial['testimonial']; ?>  </p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
@@ -347,7 +366,7 @@
 									<p class="credit">- <strong>W.B. Yeats.</strong> <span>MNO - ABC.</span></p>
 								</div>
 							</div>
-						</section>
+						</section> -->
 					</div>
 				</div>
 			</section>
@@ -359,7 +378,7 @@
 					<div class="content">
 						<section>
 							<h3>Conatct Us</h3>
-							<p><!-- You can contact Us though we will not reply but still if you want contact us here -->.</p>
+							<p><!-- You can contact Us though we will not reply but still if you want contact us here --></p>
 							<p>Contact Us Contact Us Contact Us Contact Us Contact Us Contact Us</p>
 						</section>
 						<section>
@@ -394,7 +413,7 @@
 						</section> -->
 					</div>
 					<div class="copyright">
-						&copy; Datta Meghe College of Engineering <a href="https://unsplash.co">Airoli</a>, New <a href="https://coverr.co">Mumbai</a>.
+						&copy; Datta Meghe College of Engineering <a href="#">Airoli</a>, New <a href="#">Mumbai</a>.
 					</div>
 				</div>
 			</footer>
@@ -405,6 +424,15 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script type="text/javascript">
+				var path = "<?php echo $output['banner_path']; ?>"
+				console.log(path);
+				$("#banner").css("background-image", "url(" + path + ")");
+
+				var path = "<?php echo $output['about_img_path']; ?>"
+				console.log(path);
+			    $("#cta").css("background-image", "url(" + path + ")");
+			</script>
 
 	</body>
 </html>

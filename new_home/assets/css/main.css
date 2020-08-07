@@ -822,6 +822,7 @@ table.alt tbody tr td {
     width: 33.3333333333%; }
   .testimonials > * {
     padding: 1.5rem;
+
     width: calc(33.3333333333% + 1rem); }
   .testimonials > :nth-child(-n + 3) {
     padding-top: 0; }
@@ -1780,7 +1781,7 @@ ul.icons {
 
 /* Wrapper */
 .wrapper {
-  padding: 8rem 0 6rem 0 ;
+  padding: 3rem 0 3rem 0 ;      /*default 8 0 6 0*/
   position: relative;
   z-index: 1; }
   @media screen and (max-width: 1280px) {
@@ -2206,9 +2207,17 @@ ul.icons {
 
 /* Footer */
 #footer {
-  background-color: #111111;
-  color: rgba(255, 255, 255, 0.5);
-  padding: 8rem 0 6rem 0 ; }
+  background-color: #00000;                          /*default 111111*/
+  color: rgba(0, 0, 0, 0.5);                         /*default 255,255,255,0.5*/
+  padding: 1rem 0 6rem 0 ; }                          /*default 8 0 0 6*/
+
+  #footer .inner .content {
+    /*border-bottom: 2px black solid;*/
+    padding-top: 3rem;
+    border-top: 1px rgba(0, 0, 0, 0.25) solid;
+    border-spacing: 
+  }
+
   #footer input, #footer select, #footer textarea {
     color: #ffffff; }
   #footer a {
@@ -2216,7 +2225,7 @@ ul.icons {
   #footer strong, #footer b {
     color: #ffffff; }
   #footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
-    color: #ffffff; }
+    color: #00000; }                           /*default ffffff*/
   #footer blockquote {
     border-left-color: rgba(255, 255, 255, 0.25); }
   #footer code {
@@ -2340,7 +2349,7 @@ ul.icons {
     #footer .testimonials .content .credit strong {
       color: #ce1b28; }
   #footer a {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 1);                 /* default color: rgba(255, 255, 255, 0.5);*/
     text-decoration: none; }
     #footer a:hover {
       color: #ce1b28; }
@@ -2386,6 +2395,9 @@ ul.icons {
   @media screen and (max-width: 480px) {
     #footer {
       padding: 2rem 0 0.1rem 0 ; } }
+
+
+/************************************************************************************************************************************/
 
 /* Header */
 body {
